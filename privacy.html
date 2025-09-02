@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Privacy Policy - InboxHub for TikTok</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #5a3ab3;
@@ -11,81 +12,143 @@
             --dark: #121212;
             --light: #f8f9fa;
             --gray: #6c757d;
+            --light-purple: #f0ebff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
         
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.7;
             color: var(--dark);
-            background: var(--light);
-            margin: 0;
-            padding: 0;
+            background: linear-gradient(135deg, #f5f7ff 0%, #f0ebff 100%);
+            padding: 20px;
+            min-height: 100vh;
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 2rem;
             background: white;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
         }
         
         header {
+            background: linear-gradient(120deg, var(--primary) 0%, #7c5acf 100%);
+            color: white;
+            padding: 2.5rem;
             text-align: center;
-            margin-bottom: 3rem;
-            border-bottom: 2px solid var(--primary);
-            padding-bottom: 1rem;
         }
         
-        h1 {
-            color: var(--primary);
-            font-size: 2.5rem;
+        header h1 {
+            font-size: 2.8rem;
             margin-bottom: 0.5rem;
+            font-weight: 700;
         }
         
-        .last-updated {
-            color: var(--gray);
-            font-size: 0.9rem;
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 2.5rem;
         }
         
         h2 {
             color: var(--primary);
-            margin-top: 2.5rem;
+            margin: 2rem 0 1rem;
             padding-bottom: 0.5rem;
             border-bottom: 1px solid #eee;
+            font-size: 1.8rem;
         }
         
         h3 {
             color: var(--dark);
-            margin-top: 1.5rem;
+            margin: 1.5rem 0 0.8rem;
+            font-size: 1.3rem;
         }
         
-        .section {
-            margin-bottom: 2rem;
+        p, ul {
+            margin-bottom: 1.2rem;
+            color: #444;
+        }
+        
+        ul {
+            padding-left: 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
         }
         
         .highlight {
             background: #fff9e6;
-            padding: 1rem;
+            padding: 1.2rem;
             border-left: 4px solid #ffcc00;
             margin: 1.5rem 0;
             border-radius: 4px;
         }
         
-        footer {
-            margin-top: 3rem;
-            padding-top: 2rem;
-            border-top: 1px solid #eee;
+        .contact-box {
+            background: var(--light-purple);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
             text-align: center;
-            color: var(--gray);
-            font-size: 0.9rem;
+        }
+        
+        .contact-box h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+        
+        .email {
+            display: inline-block;
+            background: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            margin: 1rem 0;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .email:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        
+        .email i {
+            margin-right: 8px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: var(--dark);
+            color: white;
         }
         
         @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
-                margin: 0;
-                box-shadow: none;
+            .content {
+                padding: 1.5rem;
+            }
+            
+            header {
+                padding: 1.5rem;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
             }
         }
     </style>
@@ -94,15 +157,13 @@
     <div class="container">
         <header>
             <h1>Privacy Policy</h1>
-            <p class="last-updated">Last updated: September 2, 2025</p>
+            <p>Last updated: September 2, 2025</p>
         </header>
-
-        <div class="section">
+        
+        <div class="content">
             <h2>1. Introduction</h2>
             <p>Welcome to <strong>InboxHub for TikTok</strong> ("we," "our," or "us"). We are committed to protecting your privacy and being transparent about how we handle your information. This Privacy Policy explains how we collect, use, and protect your data when you use our unified inbox management service.</p>
-        </div>
-
-        <div class="section">
+            
             <h2>2. Information We Collect</h2>
             <h3>2.1 Account Information</h3>
             <p>When you register, we collect:</p>
@@ -128,9 +189,7 @@
                 <li>Device information</li>
                 <li>Usage patterns and service analytics</li>
             </ul>
-        </div>
-
-        <div class="section">
+            
             <h2>3. How We Use Your Information</h2>
             <p>We use your data to:</p>
             <ul>
@@ -145,9 +204,7 @@
             <div class="highlight">
                 <strong>We do not:</strong> Sell your data, read your private messages for advertising, or share your content with third parties for marketing purposes.
             </div>
-        </div>
-
-        <div class="section">
+            
             <h2>4. Data Storage and Security</h2>
             <h3>4.1 Encryption</h3>
             <p>All sensitive data, including TikTok access tokens, is encrypted using industry-standard AES-256 encryption both at rest and in transit.</p>
@@ -168,9 +225,7 @@
                 <li>Secure API connections to TikTok's platform</li>
                 <li>Regular security updates and monitoring</li>
             </ul>
-        </div>
-
-        <div class="section">
+            
             <h2>5. Data Sharing and Disclosure</h2>
             <p>We may share your information only in these limited circumstances:</p>
             <ul>
@@ -180,9 +235,7 @@
             </ul>
             
             <p>We never sell your personal data or message content to third parties.</p>
-        </div>
-
-        <div class="section">
+            
             <h2>6. Your Rights and Choices</h2>
             <h3>6.1 Access and Control</h3>
             <p>You have the right to:</p>
@@ -200,37 +253,27 @@
                 <li>Adjust notification preferences</li>
                 <li>Manage connected devices and sessions</li>
             </ul>
-        </div>
-
-        <div class="section">
+            
             <h2>7. Third-Party Services</h2>
             <h3>7.1 TikTok API</h3>
             <p>Our service integrates with TikTok's API. Your use of our service is subject to TikTok's Privacy Policy and Terms of Service. We only access data necessary to provide the unified inbox functionality.</p>
             
-            <h3>7.2 Analytics</h3>
-            <p>We use analytics services to understand how our service is used and to improve performance. These services collect aggregated, anonymized data that cannot identify individual users.</p>
-        </div>
-
-        <div class="section">
             <h2>8. Children's Privacy</h2>
             <p>Our service is not intended for users under 18 years of age. We do not knowingly collect data from children. If we learn we have collected data from a child, we will delete it immediately.</p>
-        </div>
-
-        <div class="section">
+            
             <h2>9. Changes to This Policy</h2>
             <p>We may update this Privacy Policy periodically. We will notify you of significant changes by email or through our service. Your continued use of the service after changes constitutes acceptance of the updated policy.</p>
-        </div>
-
-        <div class="section">
-            <h2>10. Contact Us</h2>
-            <p>If you have questions about this Privacy Policy or your data, please contact us at:</p>
-            <p>Email: privacy@yourdomain.com<br>
-            Address: [Your Company Address]<br>
-            Data Protection Officer: dpo@yourdomain.com</p>
             
-            <p>We respond to all inquiries within 48 hours.</p>
+            <div class="contact-box">
+                <h3>Privacy Concerns?</h3>
+                <p>We take your privacy seriously and are happy to answer any questions.</p>
+                <a href="mailto:tikraid1@gmail.com" class="email">
+                    <i class="fas fa-envelope"></i>tikraid1@gmail.com
+                </a>
+                <p>We respond to all inquiries within 48 hours.</p>
+            </div>
         </div>
-
+        
         <footer>
             <p>© 2025 InboxHub for TikTok. All rights reserved.</p>
         </footer>
