@@ -1,0 +1,23 @@
+export default function PrivacyPage() {
+  return (
+    <div className="container mx-auto p-4 max-w-2xl">
+      <h1 className="text-2xl font-bold mb-4">Privacy Policy</h1>
+      <p className="text-sm text-gray-600">Last updated: September 2, 2025</p>
+      
+      <h2 className="text-xl font-semibold mt-6">1. Information We Collect</h2>
+      <p>We collect your TikTok access tokens to facilitate the connection to your accounts. We may also collect profile information you provide.</p>
+
+      <h2 className="text-xl font-semibold mt-6">2. How We Use Your Information</h2>
+      <p>We use your information solely to provide the service, such as sending messages and analyzing profiles. We do not sell your data.</p>
+
+      <h2 className="text-xl font-semibold mt-6">3. Data Storage</h2>
+      <p>Your data is stored securely. We use encryption for sensitive information like access tokens.</p>
+
+      <h2 className="text-xl font-semibold mt-6">4. Third-Party Services</h2>
+      <p>We use TikTok's API, so their privacy policy also applies. We are not responsible for TikTok's data practices.</p>
+
+      <h2 className="text-xl font-semibold mt-6">5. Your Rights</h2>
+      <p>You can disconnect your TikTok accounts at any time, which will remove your access tokens from our system.</p>
+    </div>
+  );
+}
