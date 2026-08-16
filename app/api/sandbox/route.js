@@ -4,7 +4,7 @@ export const runtime = 'nodejs';
 export const maxDuration = 300;
 export const dynamic = 'force-dynamic';
 
-const NAME = 'gca-imperial';
+const NAME = 'gca-imperial-py313';
 const SOURCE = 'https://gdr-data-lake.s3.amazonaws.com/imperialvalleydas/v1.0.0/DF__UTC_20201113_235932.602.h5';
 const DEST = '/home/vercel-sandbox/imperial.h5';
 const EXPECTED = '415030456';
@@ -29,6 +29,7 @@ async function getOrCreate() {
   } catch {
     return await Sandbox.create({
       name: NAME,
+      runtime: 'python3.13',
       timeout: 300000,
       snapshotExpiration: 604800000,
       persistent: true,
@@ -53,7 +54,7 @@ export async function GET(req) {
     if (action === 'create') {
       const s = await getOrCreate();
       const timeout = await tryExtend(s);
-      const probe = await output(await s.runCommand('bash', ['-lc', 'command -v python3 || command -v python || true; python3 --version 2>/dev/null || python --version 2>/dev/null || true; command -v curl; command -v git; uname -a']));
+      const probe = await output(await s.runCommand('bash', ['-lc', 'command -v python3 || command -v python || true; python3 --version 2>/dev/null || python --version 2>/dev/null || true; command -v curl; command -v git; id; uname -a']));
       return Response.json({ ok: true, action, name: s.name, status: s.status, region: s.region, vcpus: s.vcpus, memory: s.memory, timeout, probe });
     }
 
@@ -67,7 +68,7 @@ export async function GET(req) {
     if (action === 'prepare') {
       const s = await getOrCreate();
       const timeout = await tryExtend(s);
-      const cmd = `set -euo pipefail\nPY=$(command -v python3 || command -v python)\n\"$PY\" -m pip install --disable-pip-version-check -q cmake ninja numpy h5py zstandard\nexport PATH=\"/usr/local/bin:$HOME/.local/bin:$PATH\"\n\"$PY\" -m pip install --disable-pip-version-check -q pysz\nif [ -d '${REPO}/.git' ]; then git -C '${REPO}' fetch --depth 1 origin '${BRANCH}'; git -C '${REPO}' checkout -f FETCH_HEAD; else git clone --depth 1 --branch '${BRANCH}' 'https://github.com/EdenAlpha/ng-flight-deals-.git' '${REPO}'; fi\necho FILE_SIZE=$(stat -c%s '${DEST}')\necho FILE_MD5=$(md5sum '${DEST}' | awk '{print $1}')\necho GIT=$(git -C '${REPO}' rev-parse HEAD)\n\"$PY\" - <<'PY'\nimport numpy,h5py,zstandard,pysz\nprint('numpy',numpy.__version__)\nprint('h5py',h5py.__version__)\nprint('zstandard',zstandard.__version__)\nprint('pysz','OK')\nPY`;
+      const cmd = `set -euo pipefail\nPY=$(command -v python3 || command -v python)\n\"$PY\" -m pip install --disable-pip-version-check -q cmake ninja numpy h5py zstandard\nCMAKE_BIN=$(\"$PY\" - <<'PY'\nimport cmake\nprint(cmake.CMAKE_BIN_DIR)\nPY\n)\nexport PATH=\"$CMAKE_BIN:/usr/local/bin:$HOME/.local/bin:$PATH\"\necho CMAKE=$(command -v cmake)\ncmake --version | head -n1\n\"$PY\" -m pip install --disable-pip-version-check -q pysz\nif [ -d '${REPO}/.git' ]; then git -C '${REPO}' fetch --depth 1 origin '${BRANCH}'; git -C '${REPO}' checkout -f FETCH_HEAD; else git clone --depth 1 --branch '${BRANCH}' 'https://github.com/EdenAlpha/ng-flight-deals-.git' '${REPO}'; fi\necho FILE_SIZE=$(stat -c%s '${DEST}')\necho FILE_MD5=$(md5sum '${DEST}' | awk '{print $1}')\necho GIT=$(git -C '${REPO}' rev-parse HEAD)\n\"$PY\" - <<'PY'\nimport numpy,h5py,zstandard,pysz\nprint('numpy',numpy.__version__)\nprint('h5py',h5py.__version__)\nprint('zstandard',zstandard.__version__)\nprint('pysz','OK')\nPY`;
       const result = await output(await s.runCommand('bash', ['-lc', cmd]));
       return Response.json({ ok: result.exitCode === 0, action, name: s.name, timeout, result });
     }
